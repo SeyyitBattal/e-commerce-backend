@@ -1,5 +1,6 @@
 package com.ecommerceback.ecommercebackend.util;
 
+import com.ecommerceback.ecommercebackend.dto.CategoriesResponse;
 import com.ecommerceback.ecommercebackend.dto.ProductsResponse;
 import com.ecommerceback.ecommercebackend.entity.Products;
 
