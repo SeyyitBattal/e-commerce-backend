@@ -1,10 +1,16 @@
 package com.ecommerceback.ecommercebackend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,6 +34,7 @@ public class Products {
     private long id;
 
     @Column(name = "name")
+    @Size(min = 2)
     private String name;
 
     @Column(name = "description")
@@ -40,9 +47,11 @@ public class Products {
     private Gender gender;
 
     @Column(name = "rating")
+    @DecimalMax("5")
     private double rating;
 
     @Column(name = "price")
+    @DecimalMin("10")
     private double price;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,

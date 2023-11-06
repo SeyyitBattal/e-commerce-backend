@@ -5,5 +5,5 @@ import com.ecommerceback.ecommercebackend.entity.Gender;
 
 public record ProductsResponse(long id, String name, String description,
                                Color color, Gender gender,
-                               double rating, double price) {
+                               double rating, double price, CategoriesResponse categoriesResponse) {
 }

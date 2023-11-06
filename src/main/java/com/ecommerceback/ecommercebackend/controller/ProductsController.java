@@ -15,11 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin("localhost:9000")
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
 
     private ProductsService productsService;
+
 
 
     @Autowired

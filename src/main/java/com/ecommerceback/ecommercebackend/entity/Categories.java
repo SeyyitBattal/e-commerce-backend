@@ -1,6 +1,8 @@
 package com.ecommerceback.ecommercebackend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,9 +20,11 @@ public class Categories {
     private long id;
 
     @Column(name = "name")
+    @Size(min = 2)
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Size(min = 3, max = 15, message = "Gender must be between 3 to 15")
     private Gender gender;
 
     @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
