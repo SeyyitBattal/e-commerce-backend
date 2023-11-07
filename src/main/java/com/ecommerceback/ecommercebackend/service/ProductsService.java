@@ -1,14 +1,15 @@
 package com.ecommerceback.ecommercebackend.service;
 
 
+import com.ecommerceback.ecommercebackend.dto.ProductsCategoriesResponse;
 import com.ecommerceback.ecommercebackend.dto.ProductsResponse;
 import com.ecommerceback.ecommercebackend.entity.Products;
 
 import java.util.List;
 
 public interface ProductsService {
-    List<Products> findAll();
-    Products find(long id);
-    Products save(Products products);
-    Products delete(long id);
+    List<ProductsResponse> findAll();
+    ProductsCategoriesResponse find(long id);
+    ProductsResponse save(Products products);
+    ProductsResponse delete(long id);
 }

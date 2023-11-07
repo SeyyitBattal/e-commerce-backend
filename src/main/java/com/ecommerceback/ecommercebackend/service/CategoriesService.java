@@ -1,15 +1,16 @@
 package com.ecommerceback.ecommercebackend.service;
 
+import com.ecommerceback.ecommercebackend.dto.CategoriesResponse;
 import com.ecommerceback.ecommercebackend.entity.Categories;
 
 import java.util.List;
 
 public interface CategoriesService {
-    List<Categories> findAll();
+    List<CategoriesResponse> findAll();
 
-    Categories find(long id);
+    CategoriesResponse find(long id);
 
-    Categories save(Categories categories);
+    CategoriesResponse save(Categories categories);
 
-    Categories delete(long id);
+    CategoriesResponse delete(long id);
 }

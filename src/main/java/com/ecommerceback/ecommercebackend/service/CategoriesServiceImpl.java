@@ -1,5 +1,6 @@
 package com.ecommerceback.ecommercebackend.service;
 
+import com.ecommerceback.ecommercebackend.dto.CategoriesResponse;
 import com.ecommerceback.ecommercebackend.entity.Categories;
 import com.ecommerceback.ecommercebackend.repository.CategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriesServiceImpl implements CategoriesService {
@@ -19,31 +21,28 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public List<Categories> findAll() {
-        return categoriesRepository.findAll();
+    public List<CategoriesResponse> findAll() {
+        return categoriesRepository.findAll()
+                .stream().map((category) -> new CategoriesResponse(category.getId(), category.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Categories find(long id) {
-        Optional<Categories> categoriesOptional = categoriesRepository.findById(id);
-        if (categoriesOptional.isPresent()) {
-            return categoriesOptional.get();
-        }
-        return null;
+    public CategoriesResponse find(long id) {
+        CategoriesResponse categoriesResponse = find(id);
+        return categoriesResponse;
     }
 
     @Override
-    public Categories save(Categories category) {
-        return categoriesRepository.save(category);
+    public CategoriesResponse save(Categories category) {
+        Categories savedCategory = categoriesRepository.save(category);
+        return new CategoriesResponse(category.getId(), category.getName());
     }
 
     @Override
-    public Categories delete(long id) {
-        Categories category = find(id);
-        if (category != null) {
-            categoriesRepository.delete(category);
-            return category;
-        }
-        return null;
+    public CategoriesResponse delete(long id) {
+        CategoriesResponse categoriesResponse = find(id);
+        categoriesRepository.deleteById(categoriesResponse.id());
+        return new CategoriesResponse(categoriesResponse.id(), categoriesResponse.name());
     }
 }

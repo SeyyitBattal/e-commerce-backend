@@ -1,9 +1,6 @@
 package com.ecommerceback.ecommercebackend.exceptions;
 
-import com.ecommerceback.ecommercebackend.entity.Products;
 import org.springframework.http.HttpStatus;
-
-import java.util.Map;
 
 public class EcommerceValidation {
 
