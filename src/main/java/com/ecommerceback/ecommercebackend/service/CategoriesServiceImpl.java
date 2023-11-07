@@ -2,8 +2,10 @@ package com.ecommerceback.ecommercebackend.service;
 
 import com.ecommerceback.ecommercebackend.dto.CategoriesResponse;
 import com.ecommerceback.ecommercebackend.entity.Categories;
+import com.ecommerceback.ecommercebackend.exceptions.CategoriesException;
 import com.ecommerceback.ecommercebackend.repository.CategoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,6 +33,15 @@ public class CategoriesServiceImpl implements CategoriesService {
     public CategoriesResponse find(long id) {
         CategoriesResponse categoriesResponse = find(id);
         return categoriesResponse;
+    }
+
+    @Override
+    public Categories findCategoryById(long id) {
+        Optional<Categories> categoryOptional = categoriesRepository.findById(id);
+        if (categoryOptional.isEmpty()) {
+            throw new CategoriesException("Category with given id not found: " + id, HttpStatus.NOT_FOUND);
+        }
+        return categoryOptional.get();
     }
 
     @Override

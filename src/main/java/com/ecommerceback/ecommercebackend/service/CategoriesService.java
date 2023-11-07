@@ -10,6 +10,8 @@ public interface CategoriesService {
 
     CategoriesResponse find(long id);
 
+    Categories findCategoryById(long id);
+
     CategoriesResponse save(Categories categories);
 
     CategoriesResponse delete(long id);
