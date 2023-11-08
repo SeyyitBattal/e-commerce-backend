@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/auth/**").permitAll();
                     auth.requestMatchers("/admin/**").hasAuthority("Admin");
-                    auth.requestMatchers("/categories/**").hasAnyAuthority("Customer", "Store", "Admin");
+                    auth.requestMatchers("/products/**").hasAnyAuthority("Customer", "Store", "Admin");
                     auth.anyRequest().authenticated();
                 })
                 .httpBasic(Customizer.withDefaults())

@@ -9,7 +9,12 @@ import java.util.List;
 
 public interface ProductsService {
     List<ProductsResponse> findAll();
+
     ProductsCategoriesResponse find(long id);
+
     ProductsResponse save(Products products);
+
+    List<Products> saveAll(List<Products> products);
+
     ProductsResponse delete(long id);
 }

@@ -65,6 +65,11 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
+    public List<Products> saveAll(List<Products> products) {
+        return productsRepository.saveAll(products);
+    }
+
+    @Override
     public ProductsResponse delete(long id) {
         ProductsCategoriesResponse productsCategoriesResponse = find(id);
         productsRepository.deleteById(productsCategoriesResponse.id());

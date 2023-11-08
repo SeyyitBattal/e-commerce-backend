@@ -11,10 +11,15 @@ import com.ecommerceback.ecommercebackend.exceptions.ProductsException;
 import com.ecommerceback.ecommercebackend.service.CategoriesService;
 import com.ecommerceback.ecommercebackend.service.ProductsService;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("localhost:9000")
@@ -24,11 +29,15 @@ public class ProductsController {
 
     private ProductsService productsService;
     private CategoriesService categoriesService;
+    private RestTemplateBuilder restTemplateBuilder;
+
+    private static final String GET_ALL_PRODUCTS = "https://workintech-fe-ecommerce.onrender.com/categories";
 
     @Autowired
-    public ProductsController(ProductsService productsService, CategoriesService categoriesService) {
+    public ProductsController(ProductsService productsService, CategoriesService categoriesService, RestTemplateBuilder restTemplateBuilder) {
         this.productsService = productsService;
         this.categoriesService = categoriesService;
+        this.restTemplateBuilder = restTemplateBuilder;
     }
 
     @GetMapping("/")
@@ -60,6 +69,28 @@ public class ProductsController {
         return new ProductsResponse(product.getId(), product.getName(), product.getDescription(),
                 product.getColor(), product.getGender(), product.getRating(), product.getPrice());
     }
+
+    @PostMapping("/all")
+    public String saveAll() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<JsonNode> productResponses =
+                restTemplate.getForEntity(GET_ALL_PRODUCTS, JsonNode.class);
+
+        List<Products> products = new ArrayList<>();
+        for (JsonNode node : productResponses.getBody()) {
+            Products product = new Products();
+            product.setName(node.get("code").asText());
+            product.setDescription(node.get("title").asText());
+            product.setColor(product.getColor());
+            product.setGender(product.getGender());
+            product.setRating(node.get("rating").asDouble());
+            product.setPrice(product.getPrice());
+            products.add(product);
+        }
+        productsService.saveAll(products);
+        return "Completed";
+    }
+
 
     @DeleteMapping("/{id}")
     public ProductsResponse remove(@PathVariable long id) {

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface UsersRepository extends JpaRepository<ApplicationUsers, Long> {
-    @Query("SELECT u FROM ApplicationUser u WHERE u.email=:email")
+    @Query("SELECT u FROM ApplicationUsers u WHERE u.email=:email")
     Optional<ApplicationUsers> findUserByEmail(String email);
 }
