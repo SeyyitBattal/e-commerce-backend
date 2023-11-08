@@ -17,16 +17,6 @@ import org.springframework.validation.annotation.Validated;
 @Table(name = "products", schema = "myschema")
 public class Products {
 
-    public Products(long id, String name, String description, Color color, Gender gender, double rating, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.color = color;
-        this.gender = gender;
-        this.rating = rating;
-        this.price = price;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
