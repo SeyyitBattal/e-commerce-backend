@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("localhost:9000")
 @RestController
 @RequestMapping("/categories")
 public class CategoriesController {

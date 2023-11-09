@@ -1,16 +1,13 @@
 package com.ecommerceback.ecommercebackend.controller;
 
-import com.ecommerceback.ecommercebackend.dto.CategoriesResponse;
 import com.ecommerceback.ecommercebackend.dto.ProductsCategoriesResponse;
 import com.ecommerceback.ecommercebackend.dto.ProductsResponse;
 import com.ecommerceback.ecommercebackend.entity.Categories;
 import com.ecommerceback.ecommercebackend.entity.Products;
 import com.ecommerceback.ecommercebackend.exceptions.CategoriesException;
 import com.ecommerceback.ecommercebackend.exceptions.EcommerceValidation;
-import com.ecommerceback.ecommercebackend.exceptions.ProductsException;
 import com.ecommerceback.ecommercebackend.service.CategoriesService;
 import com.ecommerceback.ecommercebackend.service.ProductsService;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -22,7 +19,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin("localhost:9000")
+// TODO: CROSS ORIGIN YERINE S20G4 TE SECURITY CONFIG DOSYASINDAKILER EKLENECEK
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/products")
 public class ProductsController {
@@ -31,7 +29,7 @@ public class ProductsController {
     private CategoriesService categoriesService;
     private RestTemplateBuilder restTemplateBuilder;
 
-    private static final String GET_ALL_PRODUCTS = "https://workintech-fe-ecommerce.onrender.com/categories";
+    private static final String GET_ALL_PRODUCTS = "https://workintech-fe-ecommerce.onrender.com";
 
     @Autowired
     public ProductsController(ProductsService productsService, CategoriesService categoriesService, RestTemplateBuilder restTemplateBuilder) {
